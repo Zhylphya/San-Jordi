@@ -4,7 +4,7 @@ export const grupos = [
         imagem: algumacoisa.png
     },
     {
-        texto: 'Tem certeza?\nO dragão pode aparecer...',
+        texto: 'Tem certeza? O dragão pode aparecer...',
         imagem: dragon.png
     },
     {
@@ -12,11 +12,11 @@ export const grupos = [
         imagem: Drag.png
     },
     {
-        texto: 'Cuidado...\nEle está chegando!',
+        texto: 'Cuidado...Ele está chegando!',
         imagem:
     },
     {
-        texto: 'última chance...\nRosas ou dragões?',
+        texto: 'última chance... Rosas ou dragões?',
         imagem:
     },
     {
@@ -24,8 +24,11 @@ export const grupos = [
         imagem:
     },
     {
-        texto: 'Boa escolha!\nVocê ganhou uma rosa\n e uma história para chamar de sua!'
+        texto: 'Boa escolha!Você ganhou uma rosa e uma história para chamar de sua!'
     },
+    {
+        texto: 'Vou te dar uma chance porque não quero ver você sofrer...'
+    }
     {
         texto: 'Feliz San Jordi!'
         imagem: 
