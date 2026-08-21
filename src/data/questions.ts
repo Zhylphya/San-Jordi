@@ -1,38 +1,40 @@
+import Drag from '../asserts/floral-start.png'
+
 export const questions = [
     {
         text: 'Você aceita uma rosa de San Jordi?',
-        image: algumacoisa.png
+        image: Drag
     },
     {
         text: 'Tem certeza? O dragão pode aparecer...',
-        image: dragon.png
+        image: Drag
     },
     {
         text: 'Dragões não desistem tão fácil!',
-        image: Drag.png
+        image: Drag
     },
     {
         text: 'Cuidado...Ele está chegando!',
-        image:
+        image: Drag
     },
     {
         text: 'última chance... Rosas ou dragões?',
-        image:
+        image: Drag
     },
     {
         text: 'O dragão está fugindo de você',
-        image:
+        image: Drag
     },
     {
         text: 'Boa escolha!Você ganhou uma rosa e uma história para chamar de sua!',
-        image:
+        image: Drag
     },
     {
         text: 'Vou te dar uma chance porque não quero ver você sofrer...',
-        image:
-    }
+        image: Drag
+    },
     {
         text: 'Feliz San Jordi!',
-        image: 
+        image: Drag
     }
 ]

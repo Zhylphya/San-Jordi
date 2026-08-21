@@ -1,11 +1,11 @@
 <script setup>
-import { questions } from './data/questions.ts'
+import { questions } from '../data/questions.ts'
 import { computed, ref } from 'vue'
 
-currentStage = ref(0)
+const currentStage = ref(0)
 
 const question = computed(() => {
-    return questions[currentStage]
+    return questions[currentStage.value]
 })
 
 const buttonNoSize = computed(() => {
