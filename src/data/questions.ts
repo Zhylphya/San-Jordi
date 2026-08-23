@@ -25,12 +25,12 @@ export const questions = [
         text: 'O dragão está fugindo de você',
         image: Drag
     },
-    {
-        text: 'Boa escolha!Você ganhou uma rosa e uma história para chamar de sua!',
+        {
+        text: 'Vou te dar uma chance porque não quero ver você sofrer...',
         image: Drag
     },
     {
-        text: 'Vou te dar uma chance porque não quero ver você sofrer...',
+        text: 'Boa escolha! Você ganhou uma rosa e uma história para chamar de sua!',
         image: Drag
     },
     {
