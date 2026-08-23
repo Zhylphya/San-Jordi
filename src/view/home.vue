@@ -27,12 +27,12 @@ const isLastStageForNo = computed(() => {
 </script>
 
 <template>
-    <main>
+    <main class="min-h-screen flex items-center justify-center">
 
         <figure>
             <img :src="question.image">
         </figure>
-        <h1>{{ question.text }}</h1>
+        <h1 class="text-4xl font-bold text-red-500">{{ question.text }}</h1>
         <div>
             <button v-if="!isLastStage" @click="currentStage = questions.length -1" :style="{ transform: `scale(${buttonYesSize})` }"> Sim </button>
             <button v-if="isLastStageForNo" @click="currentStage++" :style="{ transform: `scale(${buttonNoSize})` }"> Não </button>
