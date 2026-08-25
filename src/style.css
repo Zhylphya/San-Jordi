@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 @import "tailwindcss";
 
-body {
+main {
   margin: 0;
+  background-image: url(/src/asserts/styleImage/left-border.png), url(/src/asserts/styleImage/right-border.png), url(/src/asserts/styleImage/floral-start.png);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position:
+  left top,
+  right top,
+  center bottom;
+
+  background-size:
+    30% auto,
+    30% auto,
+    33% auto;
+
 }
 

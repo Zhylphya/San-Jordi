@@ -13,7 +13,7 @@ const buttonNoSize = computed(() => {
 })
 
 const buttonYesSize = computed(() => {
-    return 1 + (currentStage.value * 0.1)
+    return Math.min(1 + (currentStage.value * 0.1), 1.4)
 })
 
 const isLastStage = computed(() => {
@@ -27,17 +27,35 @@ const isLastStageForNo = computed(() => {
 </script>
 
 <template>
-    <main class="min-h-screen flex items-center justify-center">
-        <section class="flex flex-col items-center gap-6">
-            <figure>
-                <img :src="question.image">
+    <main class="min-h-screen px-4 flex justify-center items-center bg-black">
+
+        <div class="flex w-full max-w-lg flex-col items-center gap-4">
+
+            <figure class="w-full max-w-lg">
+                <img 
+                :src="question.image" 
+                class="w-full h-full object-contain">
             </figure>
-            <h1 class="text-4xl font-bold text-red-500">{{ question.text }}</h1>
-            <div>
-                <button v-if="!isLastStage" @click="currentStage = questions.length -1" :style="{ transform: `scale(${buttonYesSize})` }"> Sim </button>
-                <button v-if="isLastStageForNo" @click="currentStage++" :style="{ transform: `scale(${buttonNoSize})` }"> Não </button>
+
+            <h1 class="text-red-900 font-bold font-fraunces text-xl">
+                {{ question.text }}
+            </h1>
+
+            <div class="flex w-full justify-center px-4 gap-4 font-bold font-fraunces">
+                <button 
+                class="w-40 h-12 bg-red-900 text-white rounded-lg" v-if="!isLastStage" 
+                @click="currentStage = questions.length -1" 
+                :style="{ transform: `scale(${buttonYesSize})` }"> 
+                Sim 
+                </button>
+                <button 
+                class="w-40 h-12 bg-white text-red-900 rounded-lg" v-if="isLastStageForNo" 
+                @click="currentStage++" 
+                :style="{ transform: `scale(${buttonNoSize})` }"> 
+                Não 
+                </button>
             </div>
-        </section>
+        </div>
 
     </main>
 
