@@ -3,17 +3,27 @@
 
 main {
   margin: 0;
-  background-image: url(/src/asserts/styleImage/left-border.png), url(/src/asserts/styleImage/right-border.png), url(/src/asserts/styleImage/floral-start.png);
-  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-image:
+    url('/src/asserts/styleImage/floral-start.png'),
+    url('/src/asserts/styleImage/floral-start.png');
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
   background-position:
-  left top,
-  right top,
-  center bottom;
+    center top,
+    center bottom;
 
   background-size:
-    30% auto,
-    30% auto,
-    33% auto;
-
+    20% auto,
+    20% auto;
 }
 
+@media (max-width: 640px) {
+  .main{
+    background-size:
+    50% auto,
+    50% auto;
+  }
+}
