@@ -43,15 +43,16 @@ const isLastStageForNo = computed(() => {
 
             <div class="flex w-full justify-center px-4 gap-4 font-bold font-fraunces">
                 <button 
-                class="w-40 h-12 bg-red-900 text-white rounded-lg" v-if="!isLastStage" 
+                class="flex items-center justify-center gap-2 w-40 h-12 bg-red-900 text-white rounded-lg" v-if="!isLastStage" 
                 @click="currentStage = questions.length -1" 
-                :style="{ transform: `scale(${buttonYesSize})` }"> 
+                :style="{ transform: `scale(${buttonYesSize})` }"> <img class='w-10 h-7' src="../asserts/buttonImage/rose-button.png">
                 Sim 
                 </button>
                 <button 
-                class="w-40 h-12 bg-white text-red-900 rounded-lg" v-if="isLastStageForNo" 
+                class="flex items-center justify-center gap-4 w-40 h-12 bg-white text-red-900 rounded-lg" v-if="isLastStageForNo" 
                 @click="currentStage++" 
                 :style="{ transform: `scale(${buttonNoSize})` }"> 
+                <img class='w-12 h-12' src="../asserts/buttonImage/dragon-button.png">
                 Não 
                 </button>
             </div>
