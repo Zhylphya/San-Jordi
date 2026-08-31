@@ -1,7 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
 import SelectButton from 'primevue/selectbutton'
+import QuestionButton from '../components/questionButton.vue'
 import { questions } from '../data/questions.ts'
+import roseButton from '../asserts/buttonImage/rose-button.png'
+import dragonButton from '../asserts/buttonImage/dragon-button.png'
 
 const currentStage = ref(0)
 
@@ -36,6 +39,10 @@ const isLastStage = computed(() => {
 const isLastStageForNo = computed(() => {
     return currentStage.value < questions.length - 2
 })
+
+const buttonReset = computed(() => {
+    return currentStage.value === questions.length - 1
+})
 </script>
 
 <template>
@@ -63,7 +70,8 @@ const isLastStageForNo = computed(() => {
         <div
             class="relative z-10 flex w-[min(80vw,80vh,32rem)] max-w-lg flex-col items-center gap-6"
         >
-           <Transition name="question-fade" mode="out-in">
+            <!-- Pergunta -->
+            <Transition name="question-fade" mode="out-in">
                 <div
                     :key="currentStage"
                     class="flex w-full flex-col items-center gap-6"
@@ -84,70 +92,62 @@ const isLastStageForNo = computed(() => {
                 </div>
             </Transition>
 
+            <!-- Botões -->
             <div
-                class="flex w-full justify-center items-center gap-4 px-4 font-bold font-fraunces"
+                class="flex w-full justify-center items-center gap-[4%] px-4 font-bold font-fraunces"
             >
                 <!-- Sim -->
-                <button
+                <QuestionButton
                     v-if="!isLastStage"
-                    class="
-                        flex items-center justify-center gap-2
-                        w-40 h-12
-                        bg-red-900 hover:bg-red-800
-                        text-white
-                        rounded-lg
-                        shadow-sm
-                        transition-transform duration-300 ease-out
-                        focus-visible:outline-none
-                        focus-visible:ring-2
-                        focus-visible:ring-red-900
-                        focus-visible:ring-offset-2
-                    "
+                    label="Sim"
+                    icon="roseButton"
+                    variant="yes"
+                    :size="buttonYesSize"
                     @click="currentStage = questions.length - 1"
-                    :style="{ transform: `scale(${buttonYesSize})` }"
-                >
-                    <span class="flex items-center justify-center w-10 h-10">
-                        <img
-                            class="w-10 h-10 object-contain"
-                            src="../asserts/buttonImage/rose-button.png"
-                            alt=""
-                        >
-                    </span>
-
-                    <span>
-                        Sim
-                    </span>
-                </button>
+                />
 
                 <!-- Não -->
-                <button
+                <QuestionButton
                     v-if="isLastStageForNo"
+                    label="Não"
+                    icon="dragonButton"
+                    variant="no"
+                    :size="buttonNoSize"
+                    @click="currentStage++"
+                />
+
+                <!-- Recomeçar -->
+                <button
+                    v-if="buttonReset"
+                    type="button"
                     class="
                         flex items-center justify-center gap-2
-                        w-40 h-12
+                        w-48 h-12
                         bg-white hover:bg-gray-100
                         text-red-900
                         rounded-lg
                         shadow-sm
-                        transition-transform duration-300 ease-out
+                        transition-all duration-300 ease-out
                         focus-visible:outline-none
                         focus-visible:ring-2
                         focus-visible:ring-red-900
                         focus-visible:ring-offset-2
+                        cursor-pointer
                     "
-                    @click="currentStage++"
-                    :style="{ transform: `scale(${buttonNoSize})` }"
+                    @click="currentStage = 0"
                 >
-                    <span class="flex items-center justify-center w-10 h-10">
+                    <span
+                        class="flex items-center justify-center w-10 h-10"
+                    >
                         <img
                             class="w-10 h-10 object-contain"
-                            src="../asserts/buttonImage/dragon-button.png"
+                            src="../asserts/buttonFinalImage/reset-icon.png"
                             alt=""
                         >
                     </span>
 
                     <span>
-                        Não
+                        Recomeçar
                     </span>
                 </button>
             </div>
