@@ -65,7 +65,6 @@ const resetQuestionnaire = () => {
             overflow-hidden
         "
     >
-        <!-- Decoração superior -->
         <img
             src="../asserts/styleImage/floral-start.png"
             alt=""
@@ -78,10 +77,8 @@ const resetQuestionnaire = () => {
             "
         >
 
-        <!-- Seleção de idioma -->
         <LanguageSelector v-model="language" />
 
-        <!-- Conteúdo -->
         <div
             class="
                 relative z-10
@@ -91,14 +88,13 @@ const resetQuestionnaire = () => {
                 gap-6
             "
         >
-            <!-- Pergunta -->
+
             <QuestionContent
                 :text="question.text"
                 :image="question.image"
                 :stage="currentStage"
             />
 
-            <!-- Botões -->
             <div
                 class="
                     flex w-full
@@ -107,7 +103,7 @@ const resetQuestionnaire = () => {
                     font-bold font-fraunces
                 "
             >
-                <!-- Sim -->
+
                 <QuestionButton
                     v-if="!isLastStage"
                     :label="buttons.yes[language]"
@@ -116,7 +112,7 @@ const resetQuestionnaire = () => {
                     @click="goToFinalStage"
                 />
 
-                <!-- Não -->
+  
                 <QuestionButton
                     v-if="isLastStageForNo"
                     :label="buttons.no[language]"
@@ -125,7 +121,6 @@ const resetQuestionnaire = () => {
                     @click="nextQuestion"
                 />
 
-                <!-- Recomeçar -->
                 <button
                     v-if="isLastStage"
                     type="button"
