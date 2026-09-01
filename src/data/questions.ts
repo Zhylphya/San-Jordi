@@ -9,7 +9,7 @@ import FinalBook from '../asserts/questionsImage/final-book.png'
 export const questions = [
     {
         text: {
-            pt: 'Você aceita uma rosa de San Jordi?',
+            pt: 'Você aceita uma rosa de Sant Jordi?',
             ca: 'Acceptes una rosa de Sant Jordi?'
         },
         image: RoseTop
@@ -57,3 +57,4 @@ export const questions = [
         image: FinalBook
     }
 ]
+

@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+import roseButton from '../asserts/buttonImage/rose-button.png'
+import dragonButton from '../asserts/buttonImage/dragon-button.png'
+
+const props = defineProps<{
     label: string
-    icon: string
     variant: 'yes' | 'no'
     size: number
 }>()
@@ -9,6 +11,10 @@ defineProps<{
 defineEmits<{
     click: []
 }>()
+
+const icon = props.variant === 'yes'
+    ? roseButton
+    : dragonButton
 </script>
 
 <template>

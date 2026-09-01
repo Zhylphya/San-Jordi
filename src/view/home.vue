@@ -1,19 +1,16 @@
 <script setup>
 import { computed, ref } from 'vue'
-import SelectButton from 'primevue/selectbutton'
+
 import QuestionButton from '../components/questionButton.vue'
+import QuestionContent from '../components/questionContent.vue'
+import LanguageSelector from '../components/languageSelector.vue'
+
 import { questions } from '../data/questions.ts'
-import roseButton from '../asserts/buttonImage/rose-button.png'
-import dragonButton from '../asserts/buttonImage/dragon-button.png'
+import { translations } from '../data/translations.ts'
 
 const currentStage = ref(0)
 
 const language = ref('pt')
-
-const languageOptions = [
-    { label: 'PT', value: 'pt' },
-    { label: 'CA', value: 'ca' }
-]
 
 const question = computed(() => {
     const currentQuestion = questions[currentStage.value]
@@ -22,6 +19,10 @@ const question = computed(() => {
         ...currentQuestion,
         text: currentQuestion.text[language.value]
     }
+})
+
+const buttons = computed(() => {
+    return translations.buttons
 })
 
 const buttonNoSize = computed(() => {
@@ -40,9 +41,17 @@ const isLastStageForNo = computed(() => {
     return currentStage.value < questions.length - 2
 })
 
-const buttonReset = computed(() => {
-    return currentStage.value === questions.length - 1
-})
+const goToFinalStage = () => {
+    currentStage.value = questions.length - 1
+}
+
+const nextQuestion = () => {
+    currentStage.value++
+}
+
+const resetQuestionnaire = () => {
+    currentStage.value = 0
+}
 </script>
 
 <template>
@@ -57,40 +66,18 @@ const buttonReset = computed(() => {
         >
 
         <!-- Seleção de idioma -->
-        <SelectButton
-            v-model="language"
-            :options="languageOptions"
-            optionLabel="label"
-            optionValue="value"
-            :allowEmpty="false"
-            class="absolute top-16 right-6 sm:top-6 z-10"
-        />
+        <LanguageSelector v-model="language" />
 
         <!-- Conteúdo -->
         <div
             class="relative z-10 flex w-[min(80vw,80vh,32rem)] max-w-lg flex-col items-center gap-6"
         >
             <!-- Pergunta -->
-            <Transition name="question-fade" mode="out-in">
-                <div
-                    :key="currentStage"
-                    class="flex w-full flex-col items-center gap-6"
-                >
-                    <h1
-                        class="w-full text-center text-red-900 font-bold font-fraunces text-3xl"
-                    >
-                        {{ question.text }}
-                    </h1>
-
-                    <figure class="w-full">
-                        <img
-                            :src="question.image"
-                            class="w-full h-full object-contain"
-                            alt=""
-                        >
-                    </figure>
-                </div>
-            </Transition>
+            <QuestionContent
+                :text="question.text"
+                :image="question.image"
+                :stage="currentStage"
+            />
 
             <!-- Botões -->
             <div
@@ -99,30 +86,28 @@ const buttonReset = computed(() => {
                 <!-- Sim -->
                 <QuestionButton
                     v-if="!isLastStage"
-                    label="Sim"
-                    icon="roseButton"
+                    :label="buttons.yes[language]"
                     variant="yes"
                     :size="buttonYesSize"
-                    @click="currentStage = questions.length - 1"
+                    @click="goToFinalStage"
                 />
 
                 <!-- Não -->
                 <QuestionButton
                     v-if="isLastStageForNo"
-                    label="Não"
-                    icon="dragonButton"
+                    :label="buttons.no[language]"
                     variant="no"
                     :size="buttonNoSize"
-                    @click="currentStage++"
+                    @click="nextQuestion"
                 />
 
                 <!-- Recomeçar -->
                 <button
-                    v-if="buttonReset"
+                    v-if="isLastStage"
                     type="button"
                     class="
                         flex items-center justify-center gap-2
-                        w-48 h-12
+                        w-55 h-12
                         bg-white hover:bg-gray-100
                         text-red-900
                         rounded-lg
@@ -134,7 +119,7 @@ const buttonReset = computed(() => {
                         focus-visible:ring-offset-2
                         cursor-pointer
                     "
-                    @click="currentStage = 0"
+                    @click="resetQuestionnaire"
                 >
                     <span
                         class="flex items-center justify-center w-10 h-10"
@@ -147,7 +132,7 @@ const buttonReset = computed(() => {
                     </span>
 
                     <span>
-                        Recomeçar
+                        {{ buttons.reset[language] }}
                     </span>
                 </button>
             </div>
@@ -156,43 +141,4 @@ const buttonReset = computed(() => {
 </template>
 
 <style scoped>
-:deep(.p-selectbutton) {
-    display: flex;
-    gap: 0;
-    padding: 4px;
-    background: #f1f3f5;
-    border-radius: 8px;
-}
-
-:deep(.p-selectbutton .p-togglebutton) {
-    background: transparent;
-    color: #6b7280;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-family: inherit;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-:deep(.p-selectbutton .p-togglebutton:hover) {
-    background: #e5e7eb;
-    color: #7f1d1d;
-}
-
-:deep(.p-selectbutton .p-togglebutton.p-togglebutton-checked) {
-    background: white;
-    color: #7f1d1d;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.question-fade-enter-active,
-.question-fade-leave-active {
-    transition: opacity 0.7s ease;
-}
-
-.question-fade-enter-from,
-.question-fade-leave-to {
-    opacity: 0;
-}
 </style>
