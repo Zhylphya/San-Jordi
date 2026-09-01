@@ -12,6 +12,8 @@ const currentStage = ref(0)
 
 const language = ref('pt')
 
+const lastStage = questions.length - 1
+
 const question = computed(() => {
     const currentQuestion = questions[currentStage.value]
 
@@ -21,9 +23,7 @@ const question = computed(() => {
     }
 })
 
-const buttons = computed(() => {
-    return translations.buttons
-})
+const buttons = translations.buttons
 
 const buttonNoSize = computed(() => {
     return 1 - (currentStage.value * 0.1)
@@ -34,19 +34,21 @@ const buttonYesSize = computed(() => {
 })
 
 const isLastStage = computed(() => {
-    return currentStage.value === questions.length - 1
+    return currentStage.value === lastStage
 })
 
 const isLastStageForNo = computed(() => {
-    return currentStage.value < questions.length - 2
+    return currentStage.value < lastStage - 1
 })
 
 const goToFinalStage = () => {
-    currentStage.value = questions.length - 1
+    currentStage.value = lastStage
 }
 
 const nextQuestion = () => {
-    currentStage.value++
+    if (currentStage.value < lastStage) {
+        currentStage.value++
+    }
 }
 
 const resetQuestionnaire = () => {
@@ -56,13 +58,24 @@ const resetQuestionnaire = () => {
 
 <template>
     <main
-        class="relative min-h-screen px-4 flex justify-center items-center bg-[#F7E4E6] overflow-hidden"
+        class="
+            relative min-h-screen px-4
+            flex justify-center items-center
+            bg-[#F7E4E6]
+            overflow-hidden
+        "
     >
         <!-- Decoração superior -->
         <img
             src="../asserts/styleImage/floral-start.png"
             alt=""
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] sm:w-[15%] h-auto z-0"
+            class="
+                absolute top-0 left-1/2
+                -translate-x-1/2
+                w-[35%] sm:w-[15%]
+                h-auto
+                z-0
+            "
         >
 
         <!-- Seleção de idioma -->
@@ -70,7 +83,13 @@ const resetQuestionnaire = () => {
 
         <!-- Conteúdo -->
         <div
-            class="relative z-10 flex w-[min(80vw,80vh,32rem)] max-w-lg flex-col items-center gap-6"
+            class="
+                relative z-10
+                flex flex-col items-center
+                w-[min(80vw,80vh,32rem)]
+                max-w-lg
+                gap-6
+            "
         >
             <!-- Pergunta -->
             <QuestionContent
@@ -81,7 +100,12 @@ const resetQuestionnaire = () => {
 
             <!-- Botões -->
             <div
-                class="flex w-full justify-center items-center gap-[4%] px-4 font-bold font-fraunces"
+                class="
+                    flex w-full
+                    justify-center items-center
+                    gap-[4%] px-4
+                    font-bold font-fraunces
+                "
             >
                 <!-- Sim -->
                 <QuestionButton
@@ -110,6 +134,7 @@ const resetQuestionnaire = () => {
                         w-55 h-12
                         bg-white hover:bg-gray-100
                         text-red-900
+                        text-base sm:text-lg
                         rounded-lg
                         shadow-sm
                         transition-all duration-300 ease-out
@@ -139,6 +164,3 @@ const resetQuestionnaire = () => {
         </div>
     </main>
 </template>
-
-<style scoped>
-</style>

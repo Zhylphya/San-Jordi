@@ -22,7 +22,7 @@ defineProps<{
                 <img
                     :src="image"
                     class="w-full h-full object-contain"
-                    alt=""
+                    :alt="text"
                 >
             </figure>
         </div>
@@ -38,5 +38,12 @@ defineProps<{
 .question-fade-enter-from,
 .question-fade-leave-to {
     opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .question-fade-enter-active,
+    .question-fade-leave-active {
+        transition: none;
+    }
 }
 </style>
